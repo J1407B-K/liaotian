@@ -1,0 +1,7 @@
+RouterConfig:
+  Port: "8088"
+MysqlConfig:
+  Username: "root"
+  Password: "123456"
+  Addr: "127.0.0.1:3306"
+  DBName: "liaotian"
