@@ -5,3 +5,5 @@ MysqlConfig:
   Password: "123456"
   Addr: "127.0.0.1:3306"
   DBName: "liaotian"
+MongoConfig:
+  Addr: "mongodb://localhost:27017"

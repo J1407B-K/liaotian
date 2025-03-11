@@ -5,9 +5,10 @@ import (
 	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
-	"websocket/connect"
-	"websocket/global"
-	"websocket/model"
+	connect2 "websocket/app/connect"
+	"websocket/app/global"
+	"websocket/app/model"
+	"websocket/app/utils"
 )
 
 func UserRegister(c *gin.Context) {
@@ -35,7 +36,20 @@ func UserLogin(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	token, err := utils.GenerateToken(user.Username)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"code": 500,
+			"msg":  "generate token failed" + err.Error(),
+		})
+		log.Fatalf("generate token error: %v", err)
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code":  0,
+		"msg":   "login success",
+		"token": token,
+	})
 }
 
 // WsHandler 处理 WebSocket 连接
@@ -49,9 +63,9 @@ func WsHandler(c *gin.Context) {
 	defer conn.Close()
 
 	// 将新客户端加入连接列表
-	connect.ClientsMutex.Lock()
-	connect.Clients[conn] = true
-	connect.ClientsMutex.Unlock()
+	connect2.ClientsMutex.Lock()
+	connect2.Clients[conn] = true
+	connect2.ClientsMutex.Unlock()
 	log.Println("新 WebSocket 客户端已连接")
 
 	// 循环读取客户端消息
@@ -68,14 +82,14 @@ func WsHandler(c *gin.Context) {
 		}
 		log.Printf("收到 WebSocket 消息: %s\n", string(message))
 		// 将客户端消息发布到 Kafka
-		if err = connect.ProduceMessage(message); err != nil {
+		if err = connect2.ProduceMessage(message); err != nil {
 			log.Println("发送消息到 Kafka 出错:", err)
 		}
 	}
 
 	// 客户端断开时，从连接列表中移除
-	connect.ClientsMutex.Lock()
-	delete(connect.Clients, conn)
-	connect.ClientsMutex.Unlock()
+	connect2.ClientsMutex.Lock()
+	delete(connect2.Clients, conn)
+	connect2.ClientsMutex.Unlock()
 	log.Println("WebSocket 客户端已断开")
 }

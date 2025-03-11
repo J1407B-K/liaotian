@@ -5,7 +5,7 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/segmentio/kafka-go"
 	"log"
-	"websocket/global"
+	"websocket/app/global"
 )
 
 // broadcastMessage 将消息广播给所有已连接的 WebSocket 客户端

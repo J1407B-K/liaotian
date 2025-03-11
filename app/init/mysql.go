@@ -1,10 +1,10 @@
-package database
+package init
 
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
-	"websocket/global"
+	"websocket/app/global"
 )
 
 func InitMysql() {

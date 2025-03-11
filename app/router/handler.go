@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"websocket/service"
+	"websocket/app/service"
 )
 
 func NewWsHandler() func(*gin.Context) {

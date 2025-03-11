@@ -3,6 +3,7 @@ package model
 type Config struct {
 	RouterConfig
 	MysqlConfig
+	MongoConfig
 }
 
 type RouterConfig struct {
@@ -14,4 +15,8 @@ type MysqlConfig struct {
 	Password string
 	Addr     string
 	DBName   string
+}
+
+type MongoConfig struct {
+	Addr string
 }

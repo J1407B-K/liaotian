@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"websocket/utils"
+	"websocket/app/utils"
 )
 
 func InitRouter() *gin.Engine {

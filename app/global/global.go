@@ -2,9 +2,10 @@ package global
 
 import (
 	"github.com/gorilla/websocket"
+	"go.mongodb.org/mongo-driver/mongo"
 	"gorm.io/gorm"
 	"net/http"
-	"websocket/model"
+	"websocket/app/model"
 )
 
 const (
@@ -19,6 +20,7 @@ const (
 var (
 	MysqlDB *gorm.DB
 	Config  *model.Config
+	Mongo   *mongo.Client
 )
 
 // Upgrader 创建一个 WebSocket 升级器，允许所有跨域请求

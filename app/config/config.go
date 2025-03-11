@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/spf13/viper"
-	"websocket/global"
+	"websocket/app/global"
 )
 
 func SetupViper() {
