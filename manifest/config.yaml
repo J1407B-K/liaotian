@@ -6,4 +6,4 @@ MysqlConfig:
   Addr: "127.0.0.1:3306"
   DBName: "liaotian"
 MongoConfig:
-  Addr: "mongodb://localhost:27017"
+  Addr: "mongodb://admin:123456@172.17.0.3:27017"

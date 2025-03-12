@@ -1,4 +1,4 @@
-package init
+package initialize
 
 import (
 	"context"
@@ -21,6 +21,8 @@ func ConnectMongoDB() {
 		log.Fatalf("mongo connect failed, err:%v\n", err)
 	}
 
+	messageCollection := client.Database("msg").Collection("messages")
+
 	//测试连接
 	err = client.Ping(ctx, nil)
 	if err != nil {
@@ -28,5 +30,6 @@ func ConnectMongoDB() {
 	}
 
 	global.Mongo = client
+	global.MongoMsgCollection = messageCollection
 	log.Println("mongo connect success")
 }

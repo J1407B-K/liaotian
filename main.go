@@ -6,7 +6,7 @@ import (
 	"websocket/app/config"
 	"websocket/app/connect"
 	"websocket/app/flag"
-	"websocket/app/init"
+	"websocket/app/initialize"
 	"websocket/app/router"
 )
 
@@ -18,8 +18,8 @@ func main() {
 	config.SetupViper()
 
 	//初始化数据库
-	init.InitMysql()
-	init.ConnectMongoDB()
+	initialize.InitMysql()
+	initialize.ConnectMongoDB()
 
 	//自动建表
 	option := flag.Parse()

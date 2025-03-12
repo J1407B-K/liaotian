@@ -18,9 +18,10 @@ const (
 
 // 初始设置
 var (
-	MysqlDB *gorm.DB
-	Config  *model.Config
-	Mongo   *mongo.Client
+	MysqlDB            *gorm.DB
+	Config             *model.Config
+	Mongo              *mongo.Client
+	MongoMsgCollection *mongo.Collection
 )
 
 // Upgrader 创建一个 WebSocket 升级器，允许所有跨域请求
